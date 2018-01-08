@@ -160,22 +160,25 @@ def getCategorys(request):
 def editCategory(request):
         resp = []
         if request.POST:
-            cid =    request.POST.get('cid')
-            cname =  request.POST.get('cname')
-            cdepend_id = request.POST.get('cdenpend_id')
-            if cid and cname and cdepend_id:
-                if Category.objects.filter('cname'=cname):
+            cidNet =    request.POST.get('cid')
+            cnameNet =  request.POST.get('cname')
+            cdepend_idNet = request.POST.get('cdenpend_id')
+            if cnameNet and cdepend_idNet:
+                if Category.objects.filter(canme=cnameNet) is [] :
                     resp = {'error':'名称重复'}
                     return HttpResponse(json.dumps(resp), content_type="application/json")
                 else:
-                    c = Category('cid'=cid,'cname'=cname,'cdepend_id'=cdepend_id)
+                    if cidNet:
+                        c = Category(cid=cidNet,cname=cnameNet,cdepend_id=cdepend_idNet)
+                    else:
+                        c = Category(cname=cnameNet,cdepend_id=cdepend_idNet)
                     try:
                         c.objects.save()
                         resp = {'success':'成功'}
-                        return return HttpResponse(json.dumps(resp), content_type="application/json")
+                        return HttpResponse(json.dumps(resp), content_type="application/json")
                     except:
                         resp = {'error':'保存失败'}
-                        return return HttpResponse(json.dumps(resp), content_type="application/json")
-            else:
-                resp = {'error':'数据填写错误'}
-                return return HttpResponse(json.dumps(resp), content_type="application/json")
+                        return HttpResponse(json.dumps(resp), content_type="application/json")
+        else:
+            resp = {'error':'请填写数据'}
+            return HttpResponse(json.dumps(resp), content_type="application/json")

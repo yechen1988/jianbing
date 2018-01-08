@@ -64,6 +64,7 @@ function editCategory(cid){
 	var cname = $(cnameInput).val();
 	var cdepend = $(cdependSelect).val();
 	$.post("../editCategory",{'cid':cid,'cname':cname,'cdenpend_id':cdepend},function(data,status){
+		//未完成
 		alert(data);
 		alert(status);
 	});
@@ -102,7 +103,14 @@ function addCategoryForm(){
 };
 
 function addCategory(){
-	
+		var token = $("name['csrfmiddlewaretoken']").val();
+		var cname = $('#cname').val();
+		var cdepend = $('#cdependadd').val();
+		$.post("../editCategory",{'cname':cname,'cdenpend_id':cdepend},function(data,status){
+		//未完成
+			alert(data);
+			alert(status);
+		});
 };
 
 
