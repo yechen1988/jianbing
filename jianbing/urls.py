@@ -26,7 +26,8 @@ urlpatterns = [
     path('regist/',jbadmin_views.regist),
     
     path('categorys/',jbadmin_views.getCategoryPage),#获取分类列表
-        path('getCategorys/',jbadmin_views.getCategorys),#获取分类列表
+    path('getCategorys/',jbadmin_views.getCategorys),#获取分类列表
+    path('editCategory/',jbadmin_views.editCategory),
     
     path('getItems/',jbadmin_views.getItems),#获取商品列表
     path('items/',jbadmin_views.getItemsPage),#跳转   

@@ -114,7 +114,7 @@ def getItemsPage(request):
         
 def getItems(request):
     resp = []
-    if request.POST:  
+    if request.POST: #条件选择 
         return HttpResponse(json.dumps(resp), content_type="application/json")
     else:
         items = []
@@ -138,7 +138,7 @@ def getCategoryPage(request):
 
 def getCategorys(request):
     resp = []
-    if request.POST:
+    if request.POST:#条件选择
         return HttpResponse(json.dumps(resp), content_type="application/json")      
     else:
         cas = []
@@ -157,5 +157,25 @@ def getCategorys(request):
             resp = {'error':'读取数据失败'}
             return HttpResponse(json.dumps(resp), content_type="application/json")
         
-         
-            
+def editCategory(request):
+        resp = []
+        if request.POST:
+            cid =    request.POST.get('cid')
+            cname =  request.POST.get('cname')
+            cdepend_id = request.POST.get('cdenpend_id')
+            if cid and cname and cdepend_id:
+                if Category.objects.filter('cname'=cname):
+                    resp = {'error':'名称重复'}
+                    return HttpResponse(json.dumps(resp), content_type="application/json")
+                else:
+                    c = Category('cid'=cid,'cname'=cname,'cdepend_id'=cdepend_id)
+                    try:
+                        c.objects.save()
+                        resp = {'success':'成功'}
+                        return return HttpResponse(json.dumps(resp), content_type="application/json")
+                    except:
+                        resp = {'error':'保存失败'}
+                        return return HttpResponse(json.dumps(resp), content_type="application/json")
+            else:
+                resp = {'error':'数据填写错误'}
+                return return HttpResponse(json.dumps(resp), content_type="application/json")

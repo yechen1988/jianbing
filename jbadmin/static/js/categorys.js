@@ -58,7 +58,15 @@ $(document).ready(function(){
 });
 
 function editCategory(cid){
-
+	var cnameInput = '#cname'+cid;
+	var token = $("name['csrfmiddlewaretoken']").val();
+	var cdependSelect = '#cdepend'+cid;
+	var cname = $(cnameInput).val();
+	var cdepend = $(cdependSelect).val();
+	$.post("../editCategory",{'cid':cid,'cname':cname,'cdenpend_id':cdepend},function(data,status){
+		alert(data);
+		alert(status);
+	});
 };
 
 function delCategory(cid){
@@ -91,6 +99,10 @@ function addCategoryForm(){
 				context +=		"</li>";
 				var $row =$("#add");
 				$row.before(context);
+};
+
+function addCategory(){
+	
 };
 
 
