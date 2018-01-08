@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<head>
+<meta charset="utf-8" />
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+<title>登陆</title>
+<!-- Path to Framework7 Library CSS-->
+<link rel="stylesheet" href="/static/css/framework7.min.css" />
+</head>
+<body>
+
+	<!-- Status bar overlay for fullscreen mode-->
+	<div class="statusbar-overlay"></div>
+	<!-- Panels overlay-->
+	<div class="panel-overlay"></div>
+	<!-- Left panel with reveal effect-->
+	<div class="panel panel-left panel-reveal">
+		<div class="content-block">
+			<p>左导航块</p>
+		</div>
+	</div>
+	<div class="views">
+
+		<!-- Your main view, should have "view-main" class-->
+		<div class="view view-main">
+
+			<div class="">
+				<div class="row">
+					<div class="col-10">
+						<a href="#" data-panel="left" class="button open-panel">导航</a>
+					</div>
+			</div>
+
+
+
+			<form method="post" enctype="multipart/form-data" action="../login/"
+				class="content-block">
+				{% csrf_token %}
+				<div class="page-content">
+					<div class="list-block">
+						<li>
+							<div class="item-content">
+								<div class="item-media">
+									<i class="icon icon-form-name"></i>
+								</div>
+								<div class="item-inner">
+									<div class="item-title label">姓名</div>
+									<div class="item-input">
+										<input type="text" placeholder="你的名字" name="uname" />
+									</div>
+								</div>
+							</div>
+						</li>
+						<li>
+							<div class="item-content">
+								<div class="item-media">
+									<i class="icon icon-form-password"></i>
+								</div>
+								<div class="item-inner">
+									<div class="item-title label">密码</div>
+									<div class="item-input">
+										<input type="password" placeholder="密码" name="upsw" />
+									</div>
+								</div>
+							</div>
+						</li>
+						<div class="content-block">
+							<div class="row">
+								<div class="col-50">
+									<a href="../regist/"
+										class="button button-big button-fill color-red external">注册</a>
+								</div>
+								<div class="col-50">
+									<input type="submit" value="登陆"
+										class="button button-big button-fill color-green" />
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</form>
+		</div>
+
+	</div>
+
+	<script type="text/javascript" src="/static/js/framework7.min.js"></script>
+
+	<script type="text/javascript" src="/static/js/dock.js"></script>
+
+
+</body>
+</html>

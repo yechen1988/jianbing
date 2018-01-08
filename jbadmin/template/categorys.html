@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<head>
+<meta charset="utf-8" />
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+<title>分类</title>
+<!-- Path to Framework7 Library CSS-->
+<link rel="stylesheet" href="/static/css/framework7.min.css" />
+<link rel="stylesheet" href="/static/css/jbadmin.css" />
+</head>
+<body>
+
+	<!-- Status bar overlay for fullscreen mode-->
+	<div class="statusbar-overlay"></div>
+	<!-- Panels overlay-->
+	<div class="panel-overlay"></div>
+	<!-- Left panel with reveal effect-->
+	<div class="panel panel-left panel-reveal">
+		<div class="content-block">
+			<p>左导航块</p>
+		</div>
+	</div>
+	<div class="views">
+
+		<!-- Your main view, should have "view-main" class-->
+		<div class="view view-main">
+
+			<div class="">
+				<div class="row">
+					<div class="col-10">
+						<a href="#" data-panel="left" class="button open-panel">导航</a>
+					</div>
+				</div>
+
+
+
+
+				<div class="page-content">
+					<div class="list-block" id="categorys">
+						<li>
+							<div class="item-content">
+								<div class="item-inner">
+									<input type='hidden' id='cid' value='1' />
+									<div class="item-title label-17">分类名：</div>
+									<div class="item-input col-17">
+										<input type="text" placeholder="分类名称" name="uname" />
+									</div>
+									<div class="item-title label-17">附属：</div>
+									<div class="item-input col-17">
+										<select id='cdepend'  value='2'>
+											<option value='1'>Male</option>
+											<option value='2'>Female</option>
+										</select>
+									</div>
+									<div class="item-input col-16">
+										<a id='1' href="#" class="button button-raised button-fill color-green">修改</a>
+									</div>
+									<div class="item-input col-16">
+										<a id='1' href="#" class="button button-raised button-fill color-red">删除</a>
+									</div>
+								</div>
+							</div>
+						</li>
+						<li>
+								<div id='add' class="col-50">
+									<a href="#" class="button button-raised button-fill color-green" onclick='addCategoryForm()'>添加</a>
+								</div>
+						</li>
+					</div>
+				</div>
+
+			</div>
+
+			<script type="text/javascript" src="/static/js/framework7.min.js"></script>
+			<script type="text/javascript" src="/static/js/jquery-3.2.1.min.js"></script>
+			<script type="text/javascript" src="/static/js/dock.js"></script>
+			<script type="text/javascript" src="/static/js/categorys.js"></script>
+</body>
+</html>
