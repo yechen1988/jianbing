@@ -212,3 +212,4 @@ def delCategory(request):
         resp = {'error':'对象错误'}
         return HttpResponse(json.dumps(resp), content_type="application/json")
     
+    
