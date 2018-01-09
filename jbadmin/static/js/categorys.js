@@ -75,12 +75,10 @@ function editCategory(cid){
 };
 
 function delCategory(cid){
-		$$('.confirm-ok-cancel').on('click', function () {
 		    myApp.confirm('确定删除该分类？', 
 		      function () {
 		        	var token = $("[name='csrfmiddlewaretoken']").val();
-					$.post("../delCategory/",{'csrfmiddlewaretoken':token,'cid':cid},function(data,status){
-				
+					$.post("../delCategory/",{'csrfmiddlewaretoken':token,'cid':cid},function(data,status){				
 							if(status == 'success'){
 								myApp.alert(status['success'], '成功', function(){
 									window.location.reload();
@@ -91,8 +89,6 @@ function delCategory(cid){
 		      function () {
 		      }
 		    );
-		});
-
 };
 
 function addCategoryForm(){
