@@ -2,6 +2,7 @@ from django.shortcuts import render
 from jbadmin.models import Users,Item,Category
 import json
 from django.http import HttpResponse
+from django.db.models import Q  
 """
 Post error：
 1：找不到用户
@@ -152,7 +153,7 @@ def getCategorys(request):
                           'cname':c.cname,
                           'cdepend_id':c.cdepend_id }
                     resp.append(jc)
-                    return HttpResponse(json.dumps(resp), content_type="application/json")
+                return HttpResponse(json.dumps(resp), content_type="application/json")
         except:
             resp = {'error':'读取数据失败'}
             return HttpResponse(json.dumps(resp), content_type="application/json")
@@ -164,21 +165,50 @@ def editCategory(request):
             cnameNet =  request.POST.get('cname')
             cdepend_idNet = request.POST.get('cdenpend_id')
             if cnameNet and cdepend_idNet:
-                if Category.objects.filter(canme=cnameNet) is [] :
+                if Category.objects.filter(Q(cname=cnameNet and Category.cid!=cidNet)) is [] :
                     resp = {'error':'名称重复'}
                     return HttpResponse(json.dumps(resp), content_type="application/json")
                 else:
                     if cidNet:
-                        c = Category(cid=cidNet,cname=cnameNet,cdepend_id=cdepend_idNet)
-                    else:
-                        c = Category(cname=cnameNet,cdepend_id=cdepend_idNet)
-                    try:
-                        c.objects.save()
+                        try:
+                            c = Category.objects.get(cid=cidNet)
+                            c.cname = cnameNet
+                            c.cdepend_id=cdepend_idNet   
+                            c.save()
+                        except:
+                            resp = {'error':'保存失败'}
+                            return HttpResponse(json.dumps(resp), content_type="application/json")
                         resp = {'success':'成功'}
                         return HttpResponse(json.dumps(resp), content_type="application/json")
-                    except:
-                        resp = {'error':'保存失败'}
+                    else:
+                        try:
+                            Category.objects.create(cname=cnameNet,cdepend_id=int(cdepend_idNet))
+                        except:
+                            resp = {'error':'保存失败'}
+                            return HttpResponse(json.dumps(resp), content_type="application/json")
+                        resp = {'success':'成功'}
                         return HttpResponse(json.dumps(resp), content_type="application/json")
+
         else:
             resp = {'error':'请填写数据'}
             return HttpResponse(json.dumps(resp), content_type="application/json")
+        
+def delCategory(request):
+    resp = []
+    if request.POST:
+        cidNet =request.POST.get('cid')
+        if cidNet:
+            try:
+                Category.objects.get(cid=cidNet).delete()
+            except:
+                resp = {'error':'刪除失败'}
+                return HttpResponse(json.dumps(resp), content_type="application/json")
+            resp = {'error':'删除成功'}
+            return HttpResponse(json.dumps(resp), content_type="application/json")
+        else:
+            resp = {'error':'对象错误'}
+            return HttpResponse(json.dumps(resp), content_type="application/json")
+    else:
+        resp = {'error':'对象错误'}
+        return HttpResponse(json.dumps(resp), content_type="application/json")
+    

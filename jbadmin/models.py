@@ -31,8 +31,7 @@ class Item(models.Model):
     picture = models.ImageField(upload_to='jianbing/itempic')
 
 class Category(models.Model):
-    #鍒嗙被
-    cid = models.AutoField(primary_key=True,default=1)
+    cid = models.AutoField(primary_key=True)
     cname = models.CharField(max_length=100)
     cdepend_id = models.IntegerField(default=0)
     

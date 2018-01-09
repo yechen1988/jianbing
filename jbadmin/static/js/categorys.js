@@ -26,18 +26,19 @@ $(document).ready(function(){
 				context +=		"			<input type='hidden' id='cid"+c.cid+"' value='"+c.cid+"' />";
 				context +=		"			<div class='item-title label-17'>分类名：</div>";
 				context +=		"			<div class='item-input col-17'>";
-				context +=		"				<input type='text' placeholder='"+c.cname+"' id='cname"+c.cid+"' />";
+				context +=		"				<input type='text' value='"+c.cname+"' id='cname"+c.cid+"' />";
 				context +=		"			</div>";
 				context +=		"			<div class='item-title label-17'>附属：</div>";
 				context +=		"			<div class='item-input col-17'>";
 				context +=		"				<select id='cdepend"+c.cid+"'  value='"+c.cdepend_id+"'>";
+				context +=      "                    <option value='0' id='v0'>无</option>"
 				$.each(cs,function(dex,cc){
-					if(cs.cid!=c.cid){
-						if(cs.cid == c.cdepend_id){
+					if(cc.cid!=c.cid){
+						if(cc.cid == c.cdepend_id){
 							context +=						"<option value='"+cc.cid+"' selected>"+cc.cname+"</option>";
 						}
 						else{
-							context +=						"<option value='"+cc.cid+"' selected>"+cc.cname+"</option>";
+							context +=						"<option value='"+cc.cid+"' >"+cc.cname+"</option>";
 						}
 					}
 				});		
@@ -58,19 +59,39 @@ $(document).ready(function(){
 });
 
 function editCategory(cid){
-	var cnameInput = '#cname'+cid;
-	var token = $("name['csrfmiddlewaretoken']").val();
-	var cdependSelect = '#cdepend'+cid;
-	var cname = $(cnameInput).val();
-	var cdepend = $(cdependSelect).val();
-	$.post("../editCategory",{'cid':cid,'cname':cname,'cdenpend_id':cdepend},function(data,status){
+	var cnameInput = "cname"+cid;
+	var token = $("[name='csrfmiddlewaretoken']").val();
+	var cdependSelect ="cdepend"+cid;
+	var cname = $("#"+cnameInput).val();
+	var cdepend = $("#"+cdependSelect).val();
+	$.post("../editCategory/",{'csrfmiddlewaretoken':token,'cid':cid,'cname':cname,'cdenpend_id':cdepend},function(data,status){
 		//未完成
-		alert(data);
-		alert(status);
+			if(status == 'success'){
+				myApp.alert(status['success'], '成功', function(){
+					window.location.reload();
+				});
+			};
 	});
 };
 
 function delCategory(cid){
+		$$('.confirm-ok-cancel').on('click', function () {
+		    myApp.confirm('确定删除该分类？', 
+		      function () {
+		        	var token = $("[name='csrfmiddlewaretoken']").val();
+					$.post("../delCategory/",{'csrfmiddlewaretoken':token,'cid':cid},function(data,status){
+				
+							if(status == 'success'){
+								myApp.alert(status['success'], '成功', function(){
+									window.location.reload();
+								});
+							};
+					});
+		      },
+		      function () {
+		      }
+		    );
+		});
 
 };
 
@@ -103,13 +124,16 @@ function addCategoryForm(){
 };
 
 function addCategory(){
-		var token = $("name['csrfmiddlewaretoken']").val();
+		var token =$("[name='csrfmiddlewaretoken']").val();
 		var cname = $('#cname').val();
 		var cdepend = $('#cdependadd').val();
-		$.post("../editCategory",{'cname':cname,'cdenpend_id':cdepend},function(data,status){
+		$.post("../editCategory/",{'csrfmiddlewaretoken':token,'cname':cname,'cdenpend_id':cdepend},function(data,status){
 		//未完成
-			alert(data);
-			alert(status);
+			if(status == 'success'){
+				myApp.alert(status['success'], '成功', function(){
+					window.location.reload();
+				});
+			};
 		});
 };
 
