@@ -15,22 +15,8 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from jbadmin import views as jbadmin_views
+
 
 urlpatterns = [
-    path('',jbadmin_views.index),
-    path('index/',jbadmin_views.index),
-    path('login/',jbadmin_views.login),#登陆
-    path('regist/',jbadmin_views.regist),#注册
-    path('logout/',jbadmin_views.logout),#登出
-    
-    path('categorys/',jbadmin_views.getCategoryPage),#获取分类列表
-    path('getCategorys/',jbadmin_views.getCategorys),#获取分类列表
-    path('editCategory/',jbadmin_views.editCategory),#编辑分类
-    path('admin/delCategory/',jbadmin_views.delCategory),
-    
-    path('getItems/',jbadmin_views.getItems),#获取商品列表
-    path('items/',jbadmin_views.getItemsPage),#跳转   
-    path('editItem/',jbadmin_views.editItem),#商品编辑添加
     path('dadmin/', admin.site.urls),
 ]

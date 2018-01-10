@@ -1,5 +1,5 @@
 eclipse.preferences.version=1
-encoding//jbadmin/template/editItem.html=UTF-8
-encoding//jbadmin/template/login.html=UTF-8
-encoding//jbadmin/template/regist.html=UTF-8
+encoding//template/editItem.html=UTF-8
+encoding//template/login.html=UTF-8
+encoding//template/regist.html=UTF-8
 encoding/<project>=UTF-8

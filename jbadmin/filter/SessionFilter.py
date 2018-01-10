@@ -4,15 +4,14 @@ import re
 
 class SessionFilter(MiddlewareMixin):
     def process_request(self,request):
-        out = ['login',
-               'regist']
+        out = ['admin/regist',
+                    'admin/login',]#域名过滤列表
         f = None
         for o in out:
-            n = re.search(o,request.get_full_path().lower())
+            n = re.search(o,request.get_full_path().lower())       
             if n:
                 f = n
-        
-        if f:
+        if  f:
             return None
         
         if (request.session.get('user_id') or request.session.get('customer_id')):
