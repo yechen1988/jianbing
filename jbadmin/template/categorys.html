@@ -52,36 +52,10 @@
 
 				<div class="page-content">
 					<div class="list-block" id="categorys">
-					{% csrf_token %}
-						<li>
-							<div class="item-content">
-								<div class="item-inner">
-									<input type='hidden' id='cid' value='1' />
-									<div class="item-title label-17">分类名：</div>
-									<div class="item-input col-17">
-										<input type="text" placeholder="分类名称" name="uname" />
-									</div>
-									<div class="item-title label-17">附属：</div>
-									<div class="item-input col-17">
-										<select id='cdepend'  value='2'>
-											<option value='1'>Male</option>
-											<option value='2'>Female</option>
-										</select>
-									</div>
-									<div class="item-input col-16">
-										<a id='1' href="#" class="button button-raised button-fill color-green">修改</a>
-									</div>
-									<div class="item-input col-16">
-										<a id='1' href="#" class="button button-raised button-fill color-red">删除</a>
-									</div>
-								</div>
-							</div>
-						</li>
-						<li>
+					{% csrf_token %}	
 								<div id='add' class="col-50">
 									<a href="#" class="button button-raised button-fill color-green" onclick='addCategoryForm()'>添加</a>
 								</div>
-						</li>
 					</div>
 				</div>
 

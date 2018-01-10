@@ -24,7 +24,7 @@ $(document).ready(function(){
 				context +=		"	<div class='item-content'>";
 				context +=		"		<div class='item-inner'>";
 				context +=		"			<input type='hidden' id='cid"+c.cid+"' value='"+c.cid+"' />";
-				context +=		"			<div class='item-title label-17'>分类名：</div>";
+				context +=		"			<div class='item-title label-19'>分类名：</div>";
 				context +=		"			<div class='item-input col-17'>";
 				context +=		"				<input type='text' value='"+c.cname+"' id='cname"+c.cid+"' />";
 				context +=		"			</div>";
@@ -96,7 +96,7 @@ function addCategoryForm(){
 				context +=		"<li>";
 				context +=		"	<div class='item-content'>";
 				context +=		"		<div class='item-inner'>";
-				context +=		"			<div class='item-title label-17'>分类名：</div>";
+				context +=		"			<div class='item-title label-19'>分类名：</div>";
 				context +=		"			<div class='item-input col-17'>";
 				context +=		"				<input type='text' placeholder='分类名' id='cname' />";
 				context +=		"			</div>";

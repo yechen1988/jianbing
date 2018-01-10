@@ -1,1 +1,40 @@
-.list-block .label-17,.list-block .floating-label {  vertical-align: top;  color: rgba(0, 0, 0, 0.65);  -webkit-transition-duration: 200ms;  transition-duration: 200ms;  width: 17%;  -webkit-flex-shrink: 0;  -ms-flex: 0 0 auto;  flex-shrink: 0;}
+.list-block .label-18, .list-block .floating-label {
+	vertical-align: top;
+	color: rgba(0, 0, 0, 0.65);
+	-webkit-transition-duration: 200ms;
+	transition-duration: 200ms;
+	width: 18%;
+	-webkit-flex-shrink: 0;
+	-ms-flex: 0 0 auto;
+	flex-shrink: 0;
+}
+.list-block .label-17, .list-block .floating-label {
+	vertical-align: top;
+	color: rgba(0, 0, 0, 0.65);
+	-webkit-transition-duration: 200ms;
+	transition-duration: 200ms;
+	width: 17%;
+	-webkit-flex-shrink: 0;
+	-ms-flex: 0 0 auto;
+	flex-shrink: 0;
+}
+.list-block .label-16, .list-block .floating-label {
+	vertical-align: top;
+	color: rgba(0, 0, 0, 0.65);
+	-webkit-transition-duration: 200ms;
+	transition-duration: 200ms;
+	width: 16%;
+	-webkit-flex-shrink: 0;
+	-ms-flex: 0 0 auto;
+	flex-shrink: 0;
+}
+.list-block .label-19, .list-block .floating-label {
+	vertical-align: top;
+	color: rgba(0, 0, 0, 0.65);
+	-webkit-transition-duration: 200ms;
+	transition-duration: 200ms;
+	width: 19%;
+	-webkit-flex-shrink: 0;
+	-ms-flex: 0 0 auto;
+	flex-shrink: 0;
+}
