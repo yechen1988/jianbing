@@ -1,16 +1,75 @@
 $(document).ready(function(){
-	var $form = $("#item");
-	$form.prepend("<input type='hidden' name='iid' value='"+j['iid']+"' />");
-	var $iname = $("#iname");
-	$iname.attr('placeholder',j['iname']);
-	var $iprice = $("#iprice");
-	$iprice.attr('placeholder',j['iprice']);
-	var $cid = $("#cid");
-	$cid.attr('placeholder',j['cid']);
-	var $ipic = $("#ipic");
-	$ipic.attr('placeholder',j['ipic']);
-	$ipic.after("<img class='col-100' id='ipicimg' src='"+j['ipic']+"' />");	
+	if(j['iid']){
+		var $form = $("#item");
+		$form.prepend("<input type='hidden' name='iid' value='"+j['iid']+"' />");
+		var $iname = $("#iname");
+		$iname.attr('placeholder',j['iname']);
+		var $iprice = $("#iprice");
+		$iprice.attr('placeholder',j['iprice']);
+		var $cid = $("#cid");
+		$cid.attr('placeholder',j['cid']);
+		var $ipic = $("#ipic");
+		$ipic.attr('placeholder',j['ipic']);
+		$ipic.after("<img class='col-100' id='ipicimg' src='"+j['ipic']+"' />");	
+		$.getJSON("../getCategorys/",function(data){
+			var context = "";
+			context +=		"				<select id='cid'  value='"+j['cid']+"'>";
+			$.each(data,function(dex,c){
+					if(j['cid']!=c['cid']){
+						context +=						"<option value='"+c['cid']+"' >"+c['cname']+"</option>";
+					}
+					else{
+						context +=						"<option value='"+c['cid']+"' selected>"+c['cname']+"</option>";
+					}
+			});	
+			var $divcid = $("#divcid");
+			$divcid.empty();
+			$divcid.html(context);		
+		});
+	}
+	else if(j['success']){
+		myApp.alert(j['success'], '成功', function(){});
+		$.getJSON("../getCategorys/",function(data){
+				var context = "";
+				context +=		"				<select id='cid'  value='0'>";
+				$.each(data,function(dex,c){
+							context +=						"<option value='"+c['cid']+"' >"+c['cname']+"</option>";
+				});	
+				var $divcid = $("#divcid");
+				$divcid.empty();
+				$divcid.html(context);		
+		});
+	}
+	else if(j['error']){
+		myApp.alert(j['error'], '失败', function(){});
+		$.getJSON("../getCategorys/",function(data){
+				var context = "";
+				context +=		"				<select id='cid'  value='0' name='cid'>";
+				$.each(data,function(dex,c){
+							context +=						"<option value='"+c['cid']+"' >"+c['cname']+"</option>";
+				});	
+				var $divcid = $("#divcid");
+				$divcid.empty();
+				$divcid.html(context);		
+			});
+	}
+	else{
+			$.getJSON("../getCategorys/",function(data){
+				var context = "";
+				context +=		"				<select id='cid'  value='0'>";
+				$.each(data,function(dex,c){
+							context +=						"<option value='"+c['cid']+"' >"+c['cname']+"</option>";
+				});	
+				var $divcid = $("#divcid");
+				$divcid.empty();
+				$divcid.html(context);		
+			});
+	}
+
+
 });
+
+	
 
 //<input type='hidden' name='csrfmiddlewaretoken' value='' />
 //											<li>

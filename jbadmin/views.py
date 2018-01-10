@@ -30,11 +30,21 @@ def login(request):
             request.session['user_id'] = u.uid
             request.session['user_name'] = u.uname
             request.session['user_level'] = u.level_id
-            return render(request,'index.html',{'success':1})
+            return render(request,'items.html',{'success':1})
         else:    
             return render(request,'login.html',{'error':1})
     else:
         return render(request,'login.html')
+    
+def logout(request):
+    #登出
+    try:
+        del request.session['user_id']
+        del request.session['user_name']
+        del request.session['user_level']
+    except KeyError:
+        pass
+    return render(request,'login.html')
 
 
 def regist(request):
@@ -88,26 +98,33 @@ def editItem(request):
                 i = Item(iid=i_id,iname=i_name,price=i_price,category_id=i_cid,picture=i_pic)
                 try:
                     i.save()
-                    return render(request, 'editItem.html', {'success':1})
+                    il = {'success':'修改成功'}
+                    return render(request,'editItem.html',{'data':json.dumps(il)})
                 except:
-                    return render(request, 'editItem.html', {'error':3})
+                    il = {'error':'修改失败'}
+                    return render(request,'editItem.html',{'data':json.dumps(il)})
             else:
                 if Item.objects.filter(iname=i_name):#去重逻辑
-                    return render(request, 'editItem.html', {'error':3})
+                    il = {'error':'商品名重复'}
+                    return render(request,'editItem.html',{'data':json.dumps(il)})
                 else:
                     i = Item(iname=i_name,price=i_price,category_id=i_cid,picture=i_pic)
                     try:
                         i.save()
-                        return render(request, 'editItem.html', {'success':1})
+                        il = {'success':'新建商品成功'}
+                        return render(request,'editItem.html',{'data':json.dumps(il)})
                     except:
-                        return render(request, 'editItem.html', {'error':3})
+                        il = {'error':'新建商品失败'}
+                        return render(request,'editItem.html',{'data':json.dumps(il)})
                 
                 
         else:
-            return render(request, 'editItem.html', {'error':3})
+            il = {'error':'请完整输入商品信息'}
+            return render(request,'editItem.html',{'data':json.dumps(il)})
             
     else:
-        return render(request,'editItem.html')
+        il = {}
+        return render(request,'editItem.html',{'data':json.dumps(il)})
 
 
 def getItemsPage(request):

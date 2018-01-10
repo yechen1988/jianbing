@@ -20,7 +20,18 @@
 	<!-- Left panel with reveal effect-->
 	<div class="panel panel-left panel-reveal">
 		<div class="content-block">
-			<p>左导航块</p>
+						<div class="col-100">
+					<a href="../items" class="button button-raised button-fill color-green external" >商品列表</a>	
+			</div>
+			<div class="col-100">
+					<a href="../editItem" class="button button-raised button-fill color-green external" >添加商品</a>	
+			</div>
+			<div class="col-100">
+					<a href="../categorys" class="button button-raised button-fill color-green external" >编辑分类</a>	
+			</div>
+			<div class="col-100">
+					<a href="../logout" class="button button-raised button-fill color-green external" >登出</a>	
+			</div>
 		</div>
 	</div>
 	<div class="views">
@@ -78,7 +89,7 @@
 													</div>
 													<div class="item-inner">
 														<div class="item-title label">商品类别</div>
-														<div class="item-input">
+														<div class="item-input"  id="divcid">
 															<input type="text" placeholder="类别" name="cid"  id="cid"/>
 														</div>
 													</div>
@@ -109,7 +120,8 @@
 									</div>
 				</form>
 				<script type="text/javascript">
-					var j = {{data|safe}};
+					var j;
+					j = {{data|safe}};
 				</script>
 				<script type="text/javascript" src="/static/js/framework7.min.js"></script>
 				<script type="text/javascript" src="/static/js/jquery-3.2.1.min.js"></script>

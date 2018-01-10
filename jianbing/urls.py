@@ -22,8 +22,9 @@ from django.conf.urls.static import static
 urlpatterns = [
     path('',jbadmin_views.index),
     path('index/',jbadmin_views.index),
-    path('login/',jbadmin_views.login),
-    path('regist/',jbadmin_views.regist),
+    path('login/',jbadmin_views.login),#登陆
+    path('regist/',jbadmin_views.regist),#注册
+    path('logout/',jbadmin_views.logout),#登出
     
     path('categorys/',jbadmin_views.getCategoryPage),#获取分类列表
     path('getCategorys/',jbadmin_views.getCategorys),#获取分类列表
