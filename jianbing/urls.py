@@ -22,6 +22,6 @@ from django.urls.conf import include
 urlpatterns = [
     path('admin/',include("jbadmin.urls")),
     path('cu/',include("jbcustomer.urls")),
-    path('admin/',include("jbworker.urls")),
+    path('wo/',include("jbworker.urls")),
     path('dadmin/', admin.site.urls),
 ]+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)+static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
