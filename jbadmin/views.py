@@ -30,11 +30,11 @@ def login(request):
             request.session['user_id'] = u.uid
             request.session['user_name'] = u.uname
             request.session['user_level'] = u.level_id
-            return render(request,'items.html',{'success':1})
+            return render(request,'jbadmin/items.html',{'success':1})
         else:    
-            return render(request,'login.html',{'error':1})
+            return render(request,'jbadmin/login.html',{'error':1})
     else:
-        return render(request,'login.html')
+        return render(request,'jbadmin/login.html')
     
 def logout(request):
     #登出
@@ -44,7 +44,7 @@ def logout(request):
         del request.session['user_level']
     except KeyError:
         pass
-    return render(request,'login.html')
+    return render(request,'jbadmin/login.html')
 
 
 def regist(request):
@@ -57,14 +57,14 @@ def regist(request):
         if u_name and u_psw and u_level:
             u = Users.objects.filter(uname=u_name)
             if u:
-                return render(request,'regist.html',{'error':2})
+                return render(request,'jbadmin/regist.html',{'error':2})
             else:
                 Users.objects.create(uname=u_name,password=u_psw,level_id=u_level)
-                return render(request,'login.html',{'success':1})
+                return render(request,'jbadmin/login.html',{'success':1})
         else:
-            return render(request,'regist.html',{'error':2})   
+            return render(request,'jbadmin/regist.html',{'error':2})   
     else:
-        return render(request,'regist.html')   
+        return render(request,'jbadmin/regist.html')   
 
 
 #对于商品的相关方法    
@@ -84,7 +84,7 @@ def editItem(request):
               'cid':i.category_id,
               'ipic':i.picture.url
             }
-        return render(request,'editItem.html',{'data':json.dumps(il)})
+        return render(request,'jbadmin/editItem.html',{'data':json.dumps(il)})
 #         except:
 #             return render(request,'editItem.html',{'error':4})
     elif request.POST:
@@ -99,36 +99,39 @@ def editItem(request):
                 try:
                     i.save()
                     il = {'success':'修改成功'}
-                    return render(request,'editItem.html',{'data':json.dumps(il)})
+                    return render(request,'jbadmin/editItem.html',{'data':json.dumps(il)})
                 except:
                     il = {'error':'修改失败'}
-                    return render(request,'editItem.html',{'data':json.dumps(il)})
+                    return render(request,'jbadmin/editItem.html',{'data':json.dumps(il)})
             else:
                 if Item.objects.filter(iname=i_name):#去重逻辑
                     il = {'error':'商品名重复'}
-                    return render(request,'editItem.html',{'data':json.dumps(il)})
+                    return render(request,'jbadmin/editItem.html',{'data':json.dumps(il)})
                 else:
                     i = Item(iname=i_name,price=i_price,category_id=i_cid,picture=i_pic)
                     try:
                         i.save()
                         il = {'success':'新建商品成功'}
-                        return render(request,'editItem.html',{'data':json.dumps(il)})
+                        return render(request,'jbadmin/editItem.html',{'data':json.dumps(il)})
                     except:
                         il = {'error':'新建商品失败'}
-                        return render(request,'editItem.html',{'data':json.dumps(il)})
+                        return render(request,'jbadmin/editItem.html',{'data':json.dumps(il)})
                 
                 
         else:
             il = {'error':'请完整输入商品信息'}
-            return render(request,'editItem.html',{'data':json.dumps(il)})
+            return render(request,'jbadmin/editItem.html',{'data':json.dumps(il)})
             
     else:
         il = {}
-        return render(request,'editItem.html',{'data':json.dumps(il)})
+        return render(request,'jbadmin/editItem.html',{'data':json.dumps(il)})
+
+def delItem(request):
+    return render(request,'jbadmin/items.html')
 
 
 def getItemsPage(request):
-    return render(request,'items.html')
+    return render(request,'jbadmin/items.html')
         
 def getItems(request):
     resp = []
@@ -151,10 +154,10 @@ def getItems(request):
 
 
 #对于分类的相关方法
-def getCategoryPage(request):
-    return render(request,'categorys.html')
+def getCategoryPage(request):#页面跳转
+    return render(request,'jbadmin/categorys.html')
 
-def getCategorys(request):
+def getCategorys(request):#异步获取分类
     resp = []
     if request.POST:#条件选择
         return HttpResponse(json.dumps(resp), content_type="application/json")      
@@ -175,7 +178,7 @@ def getCategorys(request):
             resp = {'error':'读取数据失败'}
             return HttpResponse(json.dumps(resp), content_type="application/json")
         
-def editCategory(request):
+def editCategory(request):#编辑分类
         resp = []
         if request.POST:
             cidNet =    request.POST.get('cid')
@@ -210,7 +213,7 @@ def editCategory(request):
             resp = {'error':'请填写数据'}
             return HttpResponse(json.dumps(resp), content_type="application/json")
         
-def delCategory(request):
+def delCategory(request):#删除分类
     resp = []
     if request.POST:
         cidNet =request.POST.get('cid')

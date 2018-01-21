@@ -20,8 +20,8 @@ from django.conf.urls.static import static
 from django.urls.conf import include
 
 urlpatterns = [
-    path('admin/',include("jbadmin.urls")),
+    path('ad/',include("jbadmin.urls")),
     path('cu/',include("jbcustomer.urls")),
     path('wo/',include("jbworker.urls")),
-    path('dadmin/', admin.site.urls),
+    path('admin/', admin.site.urls),
 ]+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)+static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
