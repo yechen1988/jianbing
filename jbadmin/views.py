@@ -76,17 +76,17 @@ def editItem(request):
 #     picture = models.FileField(upload_to='./upload/itempic/')  ipic
     if request.GET.get('iid'):
         i_id = request.GET.get('iid')
-#         try
-        i = Item.objects.get(iid=i_id)
-        il = {'iid':i_id,
-              'iname':i.iname,
-              'iprice':i.price,
-              'cid':i.category_id,
-              'ipic':i.picture.url
-            }
-        return render(request,'jbadmin/editItem.html',{'data':json.dumps(il)})
-#         except:
-#             return render(request,'editItem.html',{'error':4})
+        try:
+            i = Item.objects.get(iid=i_id)
+            il = {'iid':i_id,
+                  'iname':i.iname,
+                  'iprice':i.price,
+                  'cid':i.category_id,
+                  'ipic':i.picture.url
+                }
+            return render(request,'jbadmin/editItem.html',{'data':json.dumps(il)})
+        except:
+            return render(request,'jbadmin/editItem.html')
     elif request.POST:
         i_id = request.POST.get('iid')
         i_name = request.POST.get('iname')
@@ -127,7 +127,23 @@ def editItem(request):
         return render(request,'jbadmin/editItem.html',{'data':json.dumps(il)})
 
 def delItem(request):
-    return render(request,'jbadmin/items.html')
+    resp = []
+    if request.POST:
+        iidNet =request.POST.get('iid')
+        if iidNet:
+            try:
+                Item.objects.get(iid=iidNet).delete()
+            except:
+                resp = {'error':'刪除失败'}
+                return HttpResponse(json.dumps(resp), content_type="application/json")
+            resp = {'error':'删除成功'}
+            return HttpResponse(json.dumps(resp), content_type="application/json")
+        else:
+            resp = {'error':'对象错误'}
+            return HttpResponse(json.dumps(resp), content_type="application/json")
+    else:
+        resp = {'error':'对象错误'}
+        return HttpResponse(json.dumps(resp), content_type="application/json")
 
 
 def getItemsPage(request):

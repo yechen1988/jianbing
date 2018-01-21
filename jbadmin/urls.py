@@ -32,5 +32,6 @@ urlpatterns = [
     path('getItems/',jbadmin_views.getItems),#获取商品列表
     path('items/',jbadmin_views.getItemsPage),#跳转   
     path('editItem/',jbadmin_views.editItem),#商品编辑添加
+    path('delItem/',jbadmin_views.delItem),
     path('dadmin/', admin.site.urls),
 ]
